@@ -4,7 +4,7 @@ import org.apache.spark.api.java.function.Function;
 
 public class Hello {
     public static void main(String[] args) {
-        String logFile = "D:\\kafka_producer_test.py";
+        String logFile = "hdfs://hdfsCluster/project/a.txt";
         SparkConf conf = new SparkConf().setAppName("Simple Application");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> logData = sc.textFile(logFile).cache();

@@ -18,7 +18,7 @@ public final class JavaSparkPi {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
-        int slices = (args.length == 1) ? Integer.parseInt(args[0]) : 2;
+        int slices = (args.length == 1) ? Integer.parseInt(args[0]) : 200;
         int n = 100 * slices;//200个点
         List<Integer> l = new ArrayList<Integer>(n);
         for (int i = 0; i < n; i++) {
@@ -35,7 +35,7 @@ public final class JavaSparkPi {
                 return (x * x + y * y < 1) ? 1 : 0;//每次流向reduce层的确实只有1个数
             }
         }).reduce(new Function2<Integer, Integer, Integer>() {//Function2是spark自己的类，含义是前两个Integer是输入类型，最后一个Integer是返回类型
-            
+
             public Integer call(Integer integer, Integer integer2) {//integer是上所有之前两两求和的总和，integer2是下一个map输出的结果
                 System.out.println(integer + " " + integer2);
                 /** 打印出两套差不多这个东西
